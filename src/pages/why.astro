@@ -4,19 +4,18 @@ import Controls from '../components/Controls.astro';
 import { site, base } from '../lib/site';
 
 const accents = site.accents;
-const h1 = 'most warm themes collapse';
+const h1 = 'why';
 ---
 <Base
-  title="enot - why most warm themes collapse"
-  desc="Dichromacy folds red, orange, yellow and green into one ochre band. Compare gruvbox accents against enot's, rendered live through simulated protanopia and deuteranopia."
+  title="enot - why warm themes collapse under color blindness"
+  desc="Dichromacy folds red, orange, yellow and green into one ochre band. Compare gruvbox accents against enot's under simulated protanopia and deuteranopia."
   page="why/">
   <div class="hero wrap">
     <h1 style={`--h1ch:${h1.length}`}>{h1}</h1>
     <div class="tail" aria-hidden="true">{accents.map((r) => <i style={`background:var(--${r})`}></i>)}</div>
     <p class="tagline">Warm themes encode meaning almost purely by hue.</p>
     <p class="sub">Dichromacy projects the color plane onto a single axis,
-    folding red, orange, yellow and green into one ochre band - and hue
-    is exactly what a warm palette spends its budget on.</p>
+    folding red, orange, yellow and green into one ochre band.</p>
     <Controls />
   </div>
 
@@ -32,10 +31,10 @@ const h1 = 'most warm themes collapse';
     </div>
     <p class="caption">enot's optimizer maximizes the minimum pairwise
     CIEDE2000 distance across normal vision, protanopia and deuteranopia,
-    and spreads colors along the lightness axis - the one axis dichromacy
-    never touches. The colors cannot collapse.</p>
-    <p class="caption" style="margin-top:14px">The measured distances live in
-    <a href={`${base}numbers/`}>numbers</a>; how they are achieved is the
+    and spreads colors along the lightness axis, the axis dichromacy
+    preserves.</p>
+    <p class="caption" style="margin-top:14px">The measured minima are in
+    <a href={`${base}numbers/`}>numbers</a>, the optimizer in
     <a href={`${base}method/`}>method</a>.</p>
   </div></section>
 

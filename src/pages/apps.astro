@@ -16,12 +16,12 @@ const h1 = 'applications';
   <div class="hero wrap">
     <h1 style={`--h1ch:${h1.length}`}>{h1}</h1>
     <div class="tail" aria-hidden="true">{accents.map((r) => <i style={`background:var(--${r})`}></i>)}</div>
-    <p class="tagline">One spec, many ports - and a way to see exactly what is covered.</p>
-    <p class="sub">Every row is generated from <code>ports/registry.json</code>,
-    written by the build engine. A port declares its output files and the
-    depth it reaches; the regression gate then checks that every color in
-    every one of those files belongs to the spec. Coverage is not a claim
-    on this page - it is the manifest the build produces.</p>
+    <p class="tagline">Which applications ship a theme, at which depths,
+    under which guarantee.</p>
+    <p class="sub">Every row comes from <code>ports/registry.json</code>,
+    the manifest the build writes: a port declares its output files and
+    the depth it reaches, and the regression gate checks that every color
+    in those files belongs to the spec.</p>
     <Controls />
   </div>
 
@@ -29,9 +29,9 @@ const h1 = 'applications';
     <h2>coverage matrix</h2>
     <p class="lead">Guarantee: <span class="badge full">full</span> carries
     the three-depth spec (true color, xterm-256, ANSI 16) with every
-    invariant; <span class="badge ansi">ansi</span> rides the terminal's
-    ANSI 16 palette, so its guarantee is whatever terminal scheme supplies
-    those 16 colors.</p>
+    invariant; <span class="badge ansi">ansi</span> addresses the terminal's
+    ANSI 16 palette by index, so its guarantee is whatever terminal scheme
+    supplies those 16 colors.</p>
     <div class="invwrap">
       <table class="inv">
         <tr><th>application</th><th>kind</th><th>depths</th><th>guarantee</th><th>files</th><th>install</th></tr>
@@ -53,25 +53,23 @@ const h1 = 'applications';
 
   <section><div class="wrap">
     <h2>add a port</h2>
-    <p class="lead">A new application is not a new program. The engine
-    reads one spec and renders every port under <code>ports/</code>; a
-    port is a directory with a <code>port.json</code> manifest of one of
-    three kinds.</p>
+    <p class="lead">The engine reads one spec and renders every port
+    under <code>ports/</code>; an application is added as a directory
+    with a <code>port.json</code> manifest of one of three kinds.</p>
     <ol class="method">
       <li><b>template</b> - a <code>${'{'}var{'}'}</code> file rendered per
-      theme, no code. This is the path for the long tail of simple
-      key=value color formats: name the roles, get an artifact.</li>
+      theme, no code; covers most key=value color formats.</li>
       <li><b>module</b> - a small <code>render.py</code> for formats whose
       output needs logic (attribute handling, section inheritance).</li>
       <li><b>static</b> - a file copied verbatim, for schemes that address
       the terminal palette by index.</li>
     </ol>
-    <p class="lead">Whichever kind, the manifest declares the output files
-    and the build checks their colors against the spec - so a new port
-    arrives already inside the guarantee, and already on this matrix.</p>
+    <p class="lead">In all three kinds the manifest declares the output
+    files, the build checks their colors against the spec, and the port
+    appears in the matrix above.</p>
     <p class="caption"><a href="https://github.com/enot-theme/enot">enot-theme/enot</a>
-    is the pipeline and the ports; <a href="https://github.com/enot-theme/enot/blob/main/ports">ports/</a>
-    is where a new one lands.</p>
+    is the pipeline; a new port is a directory under
+    <a href="https://github.com/enot-theme/enot/blob/main/ports">ports/</a>.</p>
   </div></section>
 
   <footer><div class="wrap">

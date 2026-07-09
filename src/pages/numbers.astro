@@ -30,10 +30,10 @@ function invTable(depth: string): string {
 }
 
 const drift = ['dark', 'light'].map((m) => metrics[m]['256'].drift_max).join(' / ');
-const h1 = 'guarantees, not vibes';
+const h1 = 'numbers';
 ---
 <Base
-  title="enot - guarantees, not vibes"
+  title="enot - measured guarantees and regression gates"
   desc="Every guarantee is computed from the spec and enforced by a regression gate: minimum pairwise CIEDE2000 across simulated visions, WCAG contrast, three color depths."
   page="numbers/">
   <div class="hero wrap">
@@ -41,8 +41,8 @@ const h1 = 'guarantees, not vibes';
     <div class="tail" aria-hidden="true">{accents.map((r) => <i style={`background:var(--${r})`}></i>)}</div>
     <p class="tagline">Every value on this page is computed from the spec
     and enforced by a regression gate.</p>
-    <p class="sub">The build fails if any of them drops. Three color
-    depths, each with its own testable invariants.</p>
+    <p class="sub">Three color depths, each with its own testable
+    invariants.</p>
     <Controls />
   </div>
 
@@ -74,9 +74,9 @@ const h1 = 'guarantees, not vibes';
     (the ranger colorscheme addresses slots 0-15). Its guarantees are the
     ANSI rows of the 16M table: minimum pairwise &Delta;E00 of {ansiGuarantee},
     disjoint lightness tiers, contrast against the background.</p>
-    <p class="caption">The whole spec is data:
+    <p class="caption">The spec itself is downloadable:
     <a href={`${base}colors.json`} download>colors.json</a> - roles &times; depths
-    &times; themes with these measured metrics embedded; the regression
+    &times; themes with these measured metrics embedded. The regression
     gate (check.py) fails the build if any number above drops, and every
     color literal in every generated theme must belong to the spec.</p>
     <p class="caption" style="margin-top:14px">Tritanopia (about 0.01% of the

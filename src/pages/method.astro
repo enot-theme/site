@@ -13,9 +13,9 @@ const h1 = 'method';
   <div class="hero wrap">
     <h1 style={`--h1ch:${h1.length}`}>{h1}</h1>
     <div class="tail" aria-hidden="true">{accents.map((r) => <i style={`background:var(--${r})`}></i>)}</div>
-    <p class="tagline">How the palette is built and kept honest.</p>
-    <p class="sub">No hand-picked colors: the earthy look is a constraint
-    on an optimizer, and every step below runs again on every build.</p>
+    <p class="tagline">How the palette is built.</p>
+    <p class="sub">The earthy look is a constraint on the optimizer;
+    every step below runs again on every build.</p>
     <Controls />
   </div>
 
@@ -24,7 +24,7 @@ const h1 = 'method';
       <li>backgrounds and text sit on fixed CIELAB lightness steps;
       accents are optimization variables;</li>
       <li>accents are confined to gruvbox hue sectors and a lightness
-      corridor, so the earthy character is a constraint, not an accident;</li>
+      corridor, which together fix the earthy character;</li>
       <li>dichromacy is simulated in linear sRGB: Vienot 1999 for protan
       and deutan, Brettel 1997 for tritan;</li>
       <li>an optimizer maximizes the minimum pairwise CIEDE2000 across
@@ -33,7 +33,7 @@ const h1 = 'method';
       anchor while the guarantee holds;</li>
       <li>a regression gate re-checks all of it on every build.</li>
     </ol>
-    <p class="caption">What the gate actually enforces is in
+    <p class="caption">The enforced thresholds are in
     <a href={`${base}numbers/`}>numbers</a>; the papers behind the
     simulation and the distance formula are in
     <a href={`${base}science/`}>science</a>.</p>

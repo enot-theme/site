@@ -87,9 +87,9 @@ that advertises COLORTERM=truecolor. mc does not degrade a skin color
 by color: on a terminal without true color it falls back to the default
 skin entirely - that is what the 256 variants are for. They carry the
 xterm-256 depth of the spec, solved by the same optimizer (see the
-invariants table on the front page). Hotkeys and dialog titles are
-encoded with underline and bold rather than accent colors: shape
-survives any vision.</p>
+invariants tables in <a href="/numbers/">numbers</a>). Hotkeys and
+dialog titles are encoded with underline and bold rather than accent
+colors, so they read the same under any vision.</p>
 `,
   },
   {
