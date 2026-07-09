@@ -38,6 +38,27 @@ with the optimized ANSI 16 set.</p>
 `,
   },
   {
+    app: 'lightline',
+    blurb: 'a statusline palette to match: mode chips on the enot '
+      + 'accents, one file for both themes',
+    body: `
+<h3>2. install</h3>
+<pre class="snippet">mkdir -p ~/.vim/autoload/lightline/colorscheme
+cp enot.vim ~/.vim/autoload/lightline/colorscheme/</pre>
+<h3>3. enable</h3>
+<pre class="snippet">let g:lightline = {'colorscheme': 'enot'}</pre>
+<h3>notes</h3>
+<p>One file serves both themes: the palette reads &amp;background when
+lightline loads it (neovim users can keep it under the nvim config at
+the same autoload path). After switching background at runtime,
+re-source with :call lightline#init() followed by lightline#colorscheme()
+and lightline#update(). Mode chips - normal blue, insert green, replace
+red, visual purple - sit on accent fills with base-color text: the 4.5:1
+contrast is the same specification guarantee the editor colors carry.
+Pairs with the enot vim scheme.</p>
+`,
+  },
+  {
     app: 'wezterm',
     blurb: 'two TOML schemes, dark and light, with the optimized '
       + 'ANSI 16 palette',

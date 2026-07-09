@@ -30,7 +30,7 @@ const files = port.outputs.map((o) => ({
   </div>
   <section><div class="wrap"><div class="steps">
     <h3>1. download</h3>
-    <p>{files.map((f, i) => <>{i > 0 && ', '}<a href={`${base}${f.name}`} download>{f.name}</a>{f.theme && ` - ${f.theme}`}</>)}</p>
+    <p>{files.map((f, i) => <>{i > 0 && ', '}<a href={`${base}${port.app}/${f.name}`} download>{f.name}</a>{f.theme && ` - ${f.theme}`}</>)}</p>
     <Fragment set:html={body} />
   </div></div></section>
   <footer><div class="wrap">

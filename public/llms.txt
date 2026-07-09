@@ -1,8 +1,8 @@
 # enot
 
-> An earthy color scheme for Midnight Commander, ranger, Telegram
-> Desktop, vim / neovim and WezTerm: dark and light themes, gruvbox
-> character, built in CIELAB and machine-checked to stay
+> An earthy color scheme for lightline, Midnight Commander, ranger,
+> Telegram Desktop, vim / neovim and WezTerm: dark and light themes,
+> gruvbox character, built in CIELAB and machine-checked to stay
 > distinguishable under color blindness - minimum pairwise CIEDE2000
 > of 8.2 between syntax accents and 7.2 across the 16 ANSI colors,
 > verified against simulated protanopia and deuteranopia.
@@ -14,21 +14,23 @@ gate fails the build if any guarantee drops.
 
 ## Scheme files
 
-- [enot-dark-16M.ini](https://enot-theme.github.io/enot-dark-16M.ini): Midnight Commander
-- [enot-dark256.ini](https://enot-theme.github.io/enot-dark256.ini): Midnight Commander
-- [enot-light-16M.ini](https://enot-theme.github.io/enot-light-16M.ini): Midnight Commander
-- [enot-light256.ini](https://enot-theme.github.io/enot-light256.ini): Midnight Commander
-- [enot.py](https://enot-theme.github.io/enot.py): ranger
-- [enot-dark.tdesktop-theme](https://enot-theme.github.io/enot-dark.tdesktop-theme): Telegram Desktop, dark theme
-- [enot-light.tdesktop-theme](https://enot-theme.github.io/enot-light.tdesktop-theme): Telegram Desktop, light theme
-- [enot.vim](https://enot-theme.github.io/enot.vim): vim / neovim
-- [enot-dark.toml](https://enot-theme.github.io/enot-dark.toml): WezTerm, dark theme
-- [enot-light.toml](https://enot-theme.github.io/enot-light.toml): WezTerm, light theme
+- [enot.vim](https://enot-theme.github.io/lightline/enot.vim): lightline
+- [enot-dark-16M.ini](https://enot-theme.github.io/mc/enot-dark-16M.ini): Midnight Commander
+- [enot-dark256.ini](https://enot-theme.github.io/mc/enot-dark256.ini): Midnight Commander
+- [enot-light-16M.ini](https://enot-theme.github.io/mc/enot-light-16M.ini): Midnight Commander
+- [enot-light256.ini](https://enot-theme.github.io/mc/enot-light256.ini): Midnight Commander
+- [enot.py](https://enot-theme.github.io/ranger/enot.py): ranger
+- [enot-dark.tdesktop-theme](https://enot-theme.github.io/telegram/enot-dark.tdesktop-theme): Telegram Desktop, dark theme
+- [enot-light.tdesktop-theme](https://enot-theme.github.io/telegram/enot-light.tdesktop-theme): Telegram Desktop, light theme
+- [enot.vim](https://enot-theme.github.io/vim/enot.vim): vim / neovim
+- [enot-dark.toml](https://enot-theme.github.io/wezterm/enot-dark.toml): WezTerm, dark theme
+- [enot-light.toml](https://enot-theme.github.io/wezterm/enot-light.toml): WezTerm, light theme
 - [colors.json](https://enot-theme.github.io/colors.json): the color spec - roles at three depths
   (true color, xterm-256, ANSI 16) with measured invariant metrics
 
 ## Documentation
 
+- [Install for lightline](https://enot-theme.github.io/lightline/)
 - [Install for Midnight Commander](https://enot-theme.github.io/mc/)
 - [Install for ranger](https://enot-theme.github.io/ranger/)
 - [Install for Telegram Desktop](https://enot-theme.github.io/telegram/)
