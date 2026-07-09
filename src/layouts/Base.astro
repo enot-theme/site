@@ -60,49 +60,52 @@ const nav: [string, string][] = [
     <nav>{nav.map(([h, t]) => <a href={`${base}${h}`}>{t}</a>)}</nav>
   </header>
   <slot />
-  <script is:inline define:vars={{ visionData: vision }}>
-    var state = { mode: "dark", vision: "normal" };
-    try {
-      var q = new URLSearchParams(location.search);
-      var saved = localStorage.getItem("enot-mode");
-      if (window.matchMedia("(prefers-color-scheme: light)").matches)
-        state.mode = "light";
-      if (saved === "dark" || saved === "light") state.mode = saved;
-      if (q.get("mode") === "dark" || q.get("mode") === "light")
-        state.mode = q.get("mode");
-      if (visionData.enot.dark[q.get("vision")]) state.vision = q.get("vision");
-    } catch (e) {}
+  <script
+    type="application/json"
+    id="vision-data"
+    is:inline
+    set:html={JSON.stringify(vision).replace(/</g, '\\u003c')}></script>
+  <script>
+    import { initialState, paletteVars, reduceClick } from '../lib/switcher.mjs';
+
+    const dataEl = document.getElementById('vision-data');
+    const visionData = JSON.parse(dataEl?.textContent ?? '{}');
+    const env = {
+      search: location.search,
+      saved: (() => { try { return localStorage.getItem('enot-mode'); } catch { return null; } })(),
+      prefersLight: window.matchMedia('(prefers-color-scheme: light)').matches,
+    };
+    let state = initialState(env, visionData);
 
     function apply() {
-      var root = document.documentElement.style;
-      var set = visionData.enot[state.mode][state.vision];
-      Object.keys(set).forEach(function (k) { root.setProperty("--" + k, set[k]); });
-      visionData.gruvbox[state.mode][state.vision].forEach(function (h, i) {
-        root.setProperty("--gruv" + i, h);
-      });
-      document.querySelectorAll("[data-mode]").forEach(function (b) {
-        b.setAttribute("aria-pressed", String(b.dataset.mode === state.mode));
-      });
-      document.querySelectorAll("[data-vision]").forEach(function (b) {
-        b.setAttribute("aria-pressed", String(b.dataset.vision === state.vision));
-      });
+      const root = document.documentElement.style;
+      for (const [name, value] of paletteVars(visionData, state)) root.setProperty(name, value);
+      for (const b of document.querySelectorAll<HTMLElement>('[data-mode]'))
+        b.setAttribute('aria-pressed', String(b.dataset.mode === state.mode));
+      for (const b of document.querySelectorAll<HTMLElement>('[data-vision]'))
+        b.setAttribute('aria-pressed', String(b.dataset.vision === state.vision));
     }
-    document.addEventListener("click", function (e) {
-      var b = e.target.closest("[data-mode],[data-vision],[data-hex]");
+
+    document.addEventListener('click', (e) => {
+      const b = (e.target as HTMLElement | null)?.closest<HTMLElement>(
+        '[data-mode],[data-vision],[data-hex]');
       if (!b) return;
-      if (b.dataset.mode) {
-        state.mode = b.dataset.mode;
-        try { localStorage.setItem("enot-mode", state.mode); } catch (e2) {}
-        apply();
-      } else if (b.dataset.vision) {
-        state.vision = b.dataset.vision;
-        apply();
-      } else if (b.dataset.hex && navigator.clipboard) {
-        navigator.clipboard.writeText(b.dataset.hex);
-        var old = b.lastChild.textContent;
-        b.lastChild.textContent = "copied";
-        setTimeout(function () { b.lastChild.textContent = old; }, 900);
+      const { state: next, effects, changed } = reduceClick(state, { ...b.dataset });
+      state = next;
+      for (const fx of effects) {
+        if (fx.type === 'persist') {
+          try { localStorage.setItem('enot-mode', fx.value); } catch {}
+        } else if (fx.type === 'copy' && navigator.clipboard) {
+          navigator.clipboard.writeText(fx.value);
+          const label = b.lastChild;
+          if (label) {
+            const old = label.textContent;
+            label.textContent = 'copied';
+            setTimeout(() => { label.textContent = old; }, 900);
+          }
+        }
       }
+      if (changed) apply();
     });
     apply();
   </script>
