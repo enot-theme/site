@@ -59,6 +59,47 @@ Pairs with the enot vim scheme.</p>
 `,
   },
   {
+    app: 'sublime',
+    blurb: 'two color schemes, dark and light, with OS-appearance '
+      + 'auto switching',
+    body: `
+<h3>2. install</h3>
+<p>Preferences &gt; Browse Packages opens the packages folder; drop both
+files into <code>User/</code>.</p>
+<h3>3. enable</h3>
+<pre class="snippet">// Preferences.sublime-settings
+"color_scheme": "auto",
+"dark_color_scheme": "enot-dark.sublime-color-scheme",
+"light_color_scheme": "enot-light.sublime-color-scheme"</pre>
+<h3>notes</h3>
+<p>Or pick one directly: UI: Select Color Scheme. The rules follow the
+same role mapping as the vim scheme - keywords red, functions green,
+strings aqua, types yellow, constants purple - and the diff backgrounds
+are the specification tint roles, so added and deleted lines stay
+distinguishable under any vision.</p>
+`,
+  },
+  {
+    app: 'vscode',
+    blurb: 'one extension, both themes: workbench colors, token rules '
+      + 'and the optimized terminal palette',
+    body: `
+<h3>2. install</h3>
+<pre class="snippet">code --install-extension enot.vsix</pre>
+<p>Or in the app: Extensions &gt; &hellip; menu &gt; Install from VSIX.</p>
+<h3>3. enable</h3>
+<p>Preferences: Color Theme &gt; enot-dark or enot-light; to follow the
+OS appearance set window.autoDetectColorScheme and pick the two enot
+themes as the preferred dark and light ones.</p>
+<h3>notes</h3>
+<p>The integrated terminal gets the optimized ANSI 16 set - the same
+palette the WezTerm schemes carry. Find matches, scrollbars and
+selections are alpha overlays over specification colors; mode-agnostic
+chrome (status bar, tabs, side bar) sits on the neutral ladder with the
+same contrast guarantees as the editor text.</p>
+`,
+  },
+  {
     app: 'wezterm',
     blurb: 'two TOML schemes, dark and light, with the optimized '
       + 'ANSI 16 palette',
@@ -133,6 +174,24 @@ the terminal default), so one file serves dark and light and follows
 whatever palette the terminal provides. Pair it with the enot WezTerm
 schemes - or any terminal carrying the enot ANSI 16 set - to get the
 guaranteed palette. Requires ranger &ge; 1.9.3.</p>
+`,
+  },
+  {
+    app: 'nimble',
+    blurb: 'two importable themes: panels, tabs, built-in terminal '
+      + 'and viewer',
+    body: `
+<h3>2. import</h3>
+<p>Settings &gt; Themes &gt; import, pick <code>enot-dark.json</code>,
+repeat for <code>enot-light.json</code>.</p>
+<h3>3. enable</h3>
+<p>Select the theme in the same tab, or set both as the dark and light
+entries of automatic switching to follow the OS appearance.</p>
+<h3>notes</h3>
+<p>File coloring matches the mc and ranger ports: directories blue,
+executables green, links aqua, marked files yellow, hidden files
+dimmed. The built-in terminal carries the optimized ANSI 16 set and
+the viewer maps its syntax colors to the same roles as the editors.</p>
 `,
   },
   {
