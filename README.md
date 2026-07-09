@@ -24,3 +24,18 @@ Pages source is set to GitHub Actions, not a branch.
 
 The scheme files and data bundle are produced by the enot pipeline:
 `make deploy` there regenerates the bundle, syncs it here and pushes.
+
+## Checks
+
+- `npm run check` - `astro check`, types the `site.json` contract so a
+  page reading a dropped field fails the build.
+- `npm test` - builds, then runs the `node:test` suite: bundle
+  consistency (gates hold, advertised numbers are floored, not rounded
+  up) and that every built link, download and nav anchor resolves.
+- `npm run coverage` - the same suite with V8 coverage and a 90% floor
+  on lines, branches and functions. Runtime coverage only counts source
+  a test loads (`src/lib/metrics.mjs`); the pages are declarative and are
+  exercised end-to-end by the link checks against `dist/`.
+
+The deploy workflow runs check and coverage before building; either
+failing blocks the deploy.
