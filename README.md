@@ -20,7 +20,9 @@ lives at the domain root with directory-style URLs).
   favicon, og card) is regenerated from them by `scripts/make-mascot.mjs`
   (`npm run mascot`).
 - `src/layouts`, `src/components`, `src/pages`, `src/styles` - the Astro
-  site. `/apps/` renders the coverage matrix from the port registry.
+  site. The index is the live demo; `/why/`, `/numbers/`, `/method/`,
+  `/science/` and `/get/` carry the story; `/apps/` renders the coverage
+  matrix from the port registry; `[app].astro` renders the install pages.
 - `public/` - the downloadable scheme files, colors.json and llms*.txt,
   synced in from the pipeline, plus the generated mascot assets.
 

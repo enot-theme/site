@@ -32,6 +32,7 @@ html[data-mode="dark"] .only-light { display: none; }
 html[data-mode="light"] .only-dark { display: none; }
 nav { display: flex; gap: 16px; flex-wrap: wrap; margin-left: auto; }
 nav a { color: var(--fg1); font-size: 13px; }
+nav a[aria-current="page"] { color: var(--fg0); }
 
 .controls { display: flex; gap: 10px; flex-wrap: wrap; margin: 26px 0; }
 .seg { display: flex; border: 1px solid var(--bg3); border-radius: 7px;

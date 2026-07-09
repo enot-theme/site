@@ -1,0 +1,44 @@
+---
+import Base from '../layouts/Base.astro';
+import Controls from '../components/Controls.astro';
+import { site, base } from '../lib/site';
+
+const accents = site.accents;
+---
+<Base
+  title="enot - why most warm themes collapse"
+  desc="Dichromacy folds red, orange, yellow and green into one ochre band. Compare gruvbox accents against enot's, rendered live through simulated protanopia and deuteranopia."
+  page="why/">
+  <div class="hero wrap">
+    <h1>most warm themes collapse</h1>
+    <div class="tail" aria-hidden="true">{accents.map((r) => <i style={`background:var(--${r})`}></i>)}</div>
+    <p class="tagline">Warm themes encode meaning almost purely by hue.</p>
+    <p class="sub">Dichromacy projects the color plane onto a single axis,
+    folding red, orange, yellow and green into one ochre band - and hue
+    is exactly what a warm palette spends its budget on.</p>
+    <Controls />
+  </div>
+
+  <section><div class="wrap">
+    <p class="lead">Switch the vision above to deuteranopia and compare:</p>
+    <div class="compare">
+      <div><h3>gruvbox accents</h3>
+        <div class="strip small">{[0, 1, 2, 3, 4, 5, 6].map((i) => <span class="sw"><i style={`background:var(--gruv${i})`}></i></span>)}</div>
+      </div>
+      <div><h3>enot accents</h3>
+        <div class="strip small">{accents.map((r) => <span class="sw"><i style={`background:var(--${r})`}></i></span>)}</div>
+      </div>
+    </div>
+    <p class="caption">enot's optimizer maximizes the minimum pairwise
+    CIEDE2000 distance across normal vision, protanopia and deuteranopia,
+    and spreads colors along the lightness axis - the one axis dichromacy
+    never touches. The colors cannot collapse.</p>
+    <p class="caption" style="margin-top:14px">The measured distances live in
+    <a href={`${base}numbers/`}>numbers</a>; how they are achieved is the
+    <a href={`${base}method/`}>method</a>.</p>
+  </div></section>
+
+  <footer><div class="wrap">
+    <span><a href={base}>&larr; enot</a> - an earthy colorscheme that survives color blindness.</span>
+  </div></footer>
+</Base>

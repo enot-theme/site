@@ -17,9 +17,9 @@ let initVars = Object.entries(dark).map(([k, h]) => `--${k}: ${h}`).join('; ');
 initVars += '; ' + gruv.map((h, i) => `--gruv${i}: ${h}`).join('; ');
 
 const nav: [string, string][] = [
-  ['#why', 'why'], ['#numbers', 'numbers'],
-  ['#method', 'method'], ['#science', 'science'],
-  ['apps/', 'apps'], ['#get', 'get it'],
+  ['why/', 'why'], ['numbers/', 'numbers'],
+  ['method/', 'method'], ['science/', 'science'],
+  ['apps/', 'apps'], ['get/', 'get it'],
 ];
 ---
 <!doctype html>
@@ -58,7 +58,7 @@ const nav: [string, string][] = [
       <img class="only-dark" src={`${base}mark-dark.webp`} width="38" height="38" alt="" />
       <img class="only-light" src={`${base}mark-light.webp`} width="38" height="38" alt="" />
     </a>
-    <nav>{nav.map(([h, t]) => <a href={`${base}${h}`}>{t}</a>)}</nav>
+    <nav>{nav.map(([h, t]) => <a href={`${base}${h}`} aria-current={page === h ? 'page' : undefined}>{t}</a>)}</nav>
   </header>
   <slot />
   <script

@@ -1,0 +1,88 @@
+---
+import Base from '../layouts/Base.astro';
+import Controls from '../components/Controls.astro';
+import { site, base } from '../lib/site';
+import { INV_LABELS } from '../lib/metrics.mjs';
+
+const accents = site.accents;
+const metrics = site.metrics;
+
+// Advertised guarantees come from the bundle; the pipeline floors them
+// and the consistency test asserts they never exceed the measured
+// worst case shown in the tables below.
+const accentsGuarantee = site.numbers.accentsMin;
+const ansiGuarantee = site.numbers.ansiMin;
+
+function invTable(depth: string): string {
+  const gates: Record<string, Record<string, number>> = {};
+  for (const g of site.gates) {
+    if (g.depth === depth) (gates[g.metric] ??= {})[g.mode] = g.threshold;
+  }
+  const rows = Object.entries(gates).map(([metric, byMode]) => {
+    const gate = Object.entries(byMode)
+      .map(([mode, thr]) => `&ge; ${thr}` + (mode === '*' ? '' : ` (${mode})`))
+      .join(' / ');
+    const cells = ['dark', 'light']
+      .map((m) => `<td class="num">${metrics[m][depth][metric]}</td>`).join('');
+    return `<tr><td>${INV_LABELS[metric]}</td><td class="num">${gate}</td>${cells}</tr>`;
+  }).join('');
+  return `<div class="invwrap"><table class="inv"><tr><th>invariant</th><th>gate</th><th>dark</th><th>light</th></tr>${rows}</table></div>`;
+}
+
+const drift = ['dark', 'light'].map((m) => metrics[m]['256'].drift_max).join(' / ');
+---
+<Base
+  title="enot - guarantees, not vibes"
+  desc="Every guarantee is computed from the spec and enforced by a regression gate: minimum pairwise CIEDE2000 across simulated visions, WCAG contrast, three color depths."
+  page="numbers/">
+  <div class="hero wrap">
+    <h1>guarantees, not vibes</h1>
+    <div class="tail" aria-hidden="true">{accents.map((r) => <i style={`background:var(--${r})`}></i>)}</div>
+    <p class="tagline">Every value on this page is computed from the spec
+    and enforced by a regression gate.</p>
+    <p class="sub">The build fails if any of them drops. Three color
+    depths, each with its own testable invariants.</p>
+    <Controls />
+  </div>
+
+  <section><div class="wrap">
+    <div class="cards">
+      <div class="card"><b set:html={`&Delta;E00 &ge; ${accentsGuarantee}`}></b><span>between any two
+      syntax accents, worst case across the three simulated visions</span></div>
+      <div class="card"><b set:html={`&Delta;E00 &ge; ${ansiGuarantee}`}></b><span>same guarantee
+      for all 16 ANSI terminal colors, both tiers</span></div>
+      <div class="card"><b>&ge; 4.5:1</b><span>WCAG contrast of every accent
+      against the background, at every depth</span></div>
+      <div class="card"><b>3 depths</b><span>true color, xterm-256 and
+      ANSI 16, all derived from one spec: colors.json</span></div>
+    </div>
+    <h3 class="invh">true color - 16M</h3>
+    <Fragment set:html={invTable('16M')} />
+    <h3 class="invh">xterm-256</h3>
+    <p class="lead">The 256-color depth is not naive quantization: the
+    xterm cube is so sparse in the muted earthy region that
+    nearest-color mapping collapses roles to &Delta;E00 = 0. Instead the same
+    max-min optimizer runs over the xterm grid, anchored to the
+    true-color values (max drift {drift} &Delta;E00). The light theme's
+    minimum is the physical ceiling of the grid at 4.5:1 contrast -
+    the true-color variants carry the full guarantee.</p>
+    <Fragment set:html={invTable('256')} />
+    <h3 class="invh">16 - ANSI</h3>
+    <p class="lead">The 16-color depth is the ANSI palette itself,
+    delivered as true color by the terminal scheme and consumed by index
+    (the ranger colorscheme addresses slots 0-15). Its guarantees are the
+    ANSI rows of the 16M table: minimum pairwise &Delta;E00 of {ansiGuarantee},
+    disjoint lightness tiers, contrast against the background.</p>
+    <p class="caption">The whole spec is data:
+    <a href={`${base}colors.json`} download>colors.json</a> - roles &times; depths
+    &times; themes with these measured metrics embedded; the regression
+    gate (check.py) fails the build if any number above drops, and every
+    color literal in every generated theme must belong to the spec.</p>
+    <p class="caption" style="margin-top:14px">Tritanopia (about 0.01% of the
+    population) is simulated and reported but not a hard constraint.</p>
+  </div></section>
+
+  <footer><div class="wrap">
+    <span><a href={base}>&larr; enot</a> - an earthy colorscheme that survives color blindness.</span>
+  </div></footer>
+</Base>

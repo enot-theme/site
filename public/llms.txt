@@ -33,6 +33,11 @@ gate fails the build if any guarantee drops.
 - [Install for Midnight Commander](https://enot-theme.github.io/mc/)
 - [Install for ranger](https://enot-theme.github.io/ranger/)
 - [Applications and coverage](https://enot-theme.github.io/apps/)
+- [All install targets](https://enot-theme.github.io/get/)
+- [Why warm themes collapse under color blindness](https://enot-theme.github.io/why/)
+- [Guarantees and measured invariants](https://enot-theme.github.io/numbers/)
+- [Method: how the palette is optimized](https://enot-theme.github.io/method/)
+- [Published work it stands on](https://enot-theme.github.io/science/)
 - [Homepage with live dichromacy simulation](https://enot-theme.github.io/)
 
 ## Optional
