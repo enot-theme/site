@@ -1,7 +1,8 @@
 # enot theme site
 
 Astro source for the enot color scheme site, served via GitHub Pages at
-https://enot-theme.github.io/site/ .
+https://enot-theme.github.io/ (this repo is the organization site, so it
+lives at the domain root with directory-style URLs).
 
 ## Layout
 
@@ -11,10 +12,15 @@ https://enot-theme.github.io/site/ .
 - `src/data/install.ts`, `src/data/config.ts` - install prose and site
   config (analytics, favicon); the site owns the words, the pipeline owns
   the numbers.
+- `src/lib/` - `site.ts` (bundle types and the shared link base),
+  `switcher.mjs` (pure theme/vision switcher logic), `metrics.mjs`
+  (invariant labels and the flooring helpers the consistency test uses),
+  `logo.mjs` (the raccoon mark: inline logo, favicon and og share it).
 - `src/layouts`, `src/components`, `src/pages`, `src/styles` - the Astro
-  site. `apps.html` renders the coverage matrix from the port registry.
+  site. `/apps/` renders the coverage matrix from the port registry.
 - `public/` - the downloadable scheme files, colors.json and llms*.txt,
   synced in from the pipeline.
+- `scripts/make-og.mjs` - regenerates `public/og.png` (`npm run og`).
 
 ## Build and deploy
 
@@ -31,11 +37,8 @@ The scheme files and data bundle are produced by the enot pipeline:
   page reading a dropped field fails the build.
 - `npm test` - builds, then runs the `node:test` suite: bundle
   consistency (gates hold, advertised numbers are floored, not rounded
-  up) and that every built link, download and nav anchor resolves.
-- `npm run coverage` - the same suite with V8 coverage and a 90% floor
-  on lines, branches and functions. Runtime coverage only counts source
-  a test loads (`src/lib/metrics.mjs`); the pages are declarative and are
-  exercised end-to-end by the link checks against `dist/`.
+  up), the switcher logic and that every built link, download and nav
+  anchor resolves.
 
-The deploy workflow runs check and coverage before building; either
-failing blocks the deploy.
+The deploy workflow runs check and test before building; either failing
+blocks the deploy.
