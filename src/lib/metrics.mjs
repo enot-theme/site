@@ -16,6 +16,7 @@ export function guarantee(metrics, depth, metric) {
   return floor1(Math.min(...vals));
 }
 
+/** @type {Record<string, string>} */
 export const INV_LABELS = {
   accents: 'min pairwise &Delta;E00 across the 7 accents, worst of normal / protanopia / deuteranopia',
   ansi16: 'min pairwise &Delta;E00 across all 16 ANSI colors',

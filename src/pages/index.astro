@@ -2,13 +2,13 @@
 import Base from '../layouts/Base.astro';
 import Controls from '../components/Controls.astro';
 import Editor from '../components/Editor.astro';
-import site from '../data/site.json';
+import { site } from '../lib/site';
 import { INV_LABELS, guarantee } from '../lib/metrics.mjs';
 
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
-const accents = site.accents as string[];
-const dark = site.vision.enot.dark.normal as Record<string, string>;
-const metrics = site.metrics as Record<string, any>;
+const accents = site.accents;
+const dark = site.vision.enot.dark.normal;
+const metrics = site.metrics;
 
 // Advertised guarantees are floored from the measured metrics, not read
 // from a pre-rounded field: the number under a ">=" must never exceed the

@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import site from '../data/site.json';
+import { site } from '../lib/site';
 import { GOATCOUNTER, FAVICON } from '../data/config';
 import Logo from '../components/Logo.astro';
 
@@ -9,7 +9,7 @@ const { title, desc, page = '' } = Astro.props;
 
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
 const canonical = site.baseUrl + page;
-const vision = site.vision as Record<string, any>;
+const vision = site.vision;
 
 // Server-set initial custom properties (dark, normal vision) so the
 // first paint is correct before the switcher runs.
